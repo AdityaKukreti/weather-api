@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .weather-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-info h2 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .weather-info p {
+            margin: 8px 0;
+        }
+
+        .error {
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form method="post">
+            <label for="city">Enter city name:</label>
+            <input type="text" id="city" name="city" required>
+            <input type="submit" value="Get Weather">
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% elif weather_data %}
+        <div class="weather-info">
+            <h2>Weather Information for {{ weather_data.name }}, {{ weather_data.region }}, {{ weather_data.country }}</h2>
+            <p>Weather: {{ weather_data.weather }}</p>
+            <p>Temperature: {{ weather_data.temp.celcius }}°C / {{ weather_data.temp.fahrenheit }}°F</p>
+            <p>Wind: {{ weather_data.wind.mph }} mph / {{ weather_data.wind.kph }} kph</p>
+            <p>Humidity: {{ weather_data.humidity }}%</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
